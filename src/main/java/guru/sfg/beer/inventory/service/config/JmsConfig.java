@@ -12,6 +12,8 @@ import org.springframework.jms.support.converter.MessageType;
 public class JmsConfig {
 
     public static final String NEW_INVENTORY_EVENT_QUEUE = "new-inventory";
+    public static final String ALLOCATE_BEER_ORDER_QUEUE = "allocate-beer-order";
+    public static final String ALLOCATE_ORDER_RESULT_QUEUE = "allocate-order-result";
 
     @Bean
     public MessageConverter messageConverter(ObjectMapper objectMapper){
