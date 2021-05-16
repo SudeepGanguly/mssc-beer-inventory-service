@@ -1,23 +1,19 @@
 package guru.sfg.beer.inventory.service.web.mappers;
 
 import guru.sfg.beer.inventory.service.domain.BeerInventory;
-import guru.sfg.beer.inventory.service.domain.BeerInventory.BeerInventoryBuilder;
 import guru.sfg.brewery.modal.BeerInventoryDto;
-import guru.sfg.brewery.modal.BeerInventoryDto.BeerInventoryDtoBuilder;
+import java.sql.Timestamp;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-05-14T10:59:43+0530",
-    comments = "version: 1.3.0.Final, compiler: javac, environment: Java 13.0.1 (Oracle Corporation)"
+    date = "2021-05-16T08:50:43+0530",
+    comments = "version: 1.4.1.Final, compiler: javac, environment: Java 13.0.1 (Oracle Corporation)"
 )
 @Component
 public class BeerInventoryMapperImpl implements BeerInventoryMapper {
-
-    @Autowired
-    private DateMapper dateMapper;
 
     @Override
     public BeerInventory beerInventoryDtoToBeerInventory(BeerInventoryDto beerInventoryDTO) {
@@ -25,15 +21,17 @@ public class BeerInventoryMapperImpl implements BeerInventoryMapper {
             return null;
         }
 
-        BeerInventoryBuilder beerInventory = BeerInventory.builder();
+        UUID id = null;
+        Long version = null;
+        Timestamp createdDate = null;
+        Timestamp lastModifiedDate = null;
+        UUID beerId = null;
+        String upc = null;
+        Integer quantityOnHand = null;
 
-        beerInventory.id( beerInventoryDTO.getId() );
-        beerInventory.createdDate( dateMapper.asTimestamp( beerInventoryDTO.getCreatedDate() ) );
-        beerInventory.lastModifiedDate( dateMapper.asTimestamp( beerInventoryDTO.getLastModifiedDate() ) );
-        beerInventory.beerId( beerInventoryDTO.getBeerId() );
-        beerInventory.quantityOnHand( beerInventoryDTO.getQuantityOnHand() );
+        BeerInventory beerInventory = new BeerInventory( id, version, createdDate, lastModifiedDate, beerId, upc, quantityOnHand );
 
-        return beerInventory.build();
+        return beerInventory;
     }
 
     @Override
@@ -42,14 +40,8 @@ public class BeerInventoryMapperImpl implements BeerInventoryMapper {
             return null;
         }
 
-        BeerInventoryDtoBuilder beerInventoryDto = BeerInventoryDto.builder();
+        BeerInventoryDto beerInventoryDto = new BeerInventoryDto();
 
-        beerInventoryDto.id( beerInventory.getId() );
-        beerInventoryDto.createdDate( dateMapper.asOffsetDateTime( beerInventory.getCreatedDate() ) );
-        beerInventoryDto.lastModifiedDate( dateMapper.asOffsetDateTime( beerInventory.getLastModifiedDate() ) );
-        beerInventoryDto.beerId( beerInventory.getBeerId() );
-        beerInventoryDto.quantityOnHand( beerInventory.getQuantityOnHand() );
-
-        return beerInventoryDto.build();
+        return beerInventoryDto;
     }
 }
