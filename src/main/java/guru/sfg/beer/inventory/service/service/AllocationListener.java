@@ -27,7 +27,7 @@ public class AllocationListener {
         try{
             Boolean allocationResult = allocationService.allocateOrder(request.getBeerOrderDto());
 
-            if(allocationResult){
+            if(!allocationResult){
                 //As if allocation done , there is no pending
                 builder.pendingInventory(false);
             } else {
